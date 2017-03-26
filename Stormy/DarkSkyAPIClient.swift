@@ -22,6 +22,18 @@ class DarkSkyAPIClient {
     
     func getCurrentWeather(at coordinate: Coordinate, completionHandeler completion: CurrentWeatherCompletionHandler) {
         
+        guard let url = URL(string: coordinate.description, relativeTo: baseURL) else {
+            completion(nil, .invalidUrl)
+            return
+        }
+        
+        let request = URLRequest(url: url)
+        
+        // jsonTask converts raw data in to JSON - 
+        // We want the json to go through our model - failable initializer 
+        let task = downloader.jsonTask(with: request) { json, error in
+            
+        }
     }
     
 }
