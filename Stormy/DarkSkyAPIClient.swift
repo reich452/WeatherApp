@@ -20,7 +20,7 @@ class DarkSkyAPIClient {
     
     typealias CurrentWeatherCompletionHandler = (CurrentWeather?, DarkSkyError?) -> Void
     
-    func getCurrentWeather(at coordinate: Coordinate, completionHandeler completion: CurrentWeatherCompletionHandler) {
+    func getCurrentWeather(at coordinate: Coordinate, completionHandeler completion: @escaping CurrentWeatherCompletionHandler) {
         
         guard let url = URL(string: coordinate.description, relativeTo: baseURL) else {
             completion(nil, .invalidUrl)
@@ -29,11 +29,24 @@ class DarkSkyAPIClient {
         
         let request = URLRequest(url: url)
         
-        // jsonTask converts raw data in to JSON - 
-        // We want the json to go through our model - failable initializer 
+        // jsonTask converts raw data in to JSON -
+        // We want the json to go through our model - failable initializer
         let task = downloader.jsonTask(with: request) { json, error in
             
+            DispatchQueue.main.async {
+                guard let json = json else {
+                    completion(nil, error)
+                    return
+                }
+                
+                guard let currentWeatherJson = json["currenly"] as? [String : AnyObject], let currentWeather = CurrentWeather(jsonDictionay: currentWeatherJson) else {
+                    completion(nil, .jsonParsingFailure)
+                    return
+                }
+                
+                completion(currentWeather, nil)
+            }
         }
+        task.resume()
     }
-    
 }

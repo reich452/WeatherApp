@@ -11,32 +11,40 @@ import UIKit
 class ViewController: UIViewController {
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let currentWeather = CurrentWeather(temperature: 85.0, humidity: 0.8, percipitationProbability: 0.1, summary: "Hot", icon: "clear-day")
-        let currentWeatherViewModel = CurrentWeatherViewModel(model: currentWeather)
-        
-        displayWeather(using: currentWeatherViewModel)
-        
-        let base = URL(string: "https://api.darksky.net/forecast/\(darkSkyApiKey)/")
-        guard let forcastUrl = URL(string: "37.8267,-122.4233", relativeTo: base) else { return }
-        
-        let configuration = URLSessionConfiguration.default
-        let session = URLSession(configuration: configuration)
-        
-        let request = URLRequest(url: forcastUrl)
-        
-        print("Log inside completion handeler")
-        
-       let dataTask = session.dataTask(with: request) { data, response, error in
-            print(data)
-        }
-        dataTask.resume()
-        
-        print("Log after resume")
-
+        getCurrentWeather()
     }
+    
+    @IBAction func getCurrentWeather() {
+        toggleRefreshAnimation(on: true)
+        
+        let client = DarkSkyAPIClient()
+        
+        let coordinate = Coordinate(latitude: 37.8267, longitude: -122.4233)
+        
+        client.getCurrentWeather(at: coordinate) { [unowned self] currentWeather, error in
+            
+            if let currentWeather = currentWeather {
+                let viewModel = CurrentWeatherViewModel(model: currentWeather)
+                self.displayWeather(using: viewModel)
+                self.toggleRefreshAnimation(on: false)
+            }
+            // Else put in an alert of what went wrong
+        }
+    }
+    
+    func toggleRefreshAnimation(on: Bool) {
+        refreshButton.isHidden = on
+        
+        if on {
+            activityIndicator.startAnimating()
+        } else {
+            activityIndicator.stopAnimating()
+        }
+    }
+   
     
     func displayWeather(using viewModel: CurrentWeatherViewModel) {
         currentTemperatureLabel.text = viewModel.temperature
@@ -47,9 +55,6 @@ class ViewController: UIViewController {
     }
     
     // MARK: - Properties
-
-    
-    fileprivate let darkSkyApiKey = "d5bfa0c8a4e1486ffff5cfb75acd4ba8"
     
     @IBOutlet weak var currentTemperatureLabel: UILabel!
     @IBOutlet weak var currentHumidityLabel: UILabel!
@@ -58,11 +63,17 @@ class ViewController: UIViewController {
     @IBOutlet weak var currentSummaryLabel: UILabel!
     @IBOutlet weak var refreshButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
-    
+
 }
 
+// Recap 
+// - Making network requests
+// - Using JSON
+// - Using closures to pass around arbitrary code
+// - Writing modular code
+// - Writing asynchronous code
 
+// - Completion handlers have to be marked @escaping since they are executed some point after the enclosing function has been executed.
 
 
 

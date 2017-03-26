@@ -47,4 +47,4 @@ extension CurrentWeather {
     }
 }
 
-// We want a model instance our of the json 
+// We want a model instance our of the json
