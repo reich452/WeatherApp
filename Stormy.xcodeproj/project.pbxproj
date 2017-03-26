@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01BDB1721E875F5500446DB5 /* CurrentWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BDB1711E875F5500446DB5 /* CurrentWeather.swift */; };
+		01BDB1741E87604A00446DB5 /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BDB1731E87604A00446DB5 /* Icon.swift */; };
 		975DC4461E550B8100D92F5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975DC4451E550B8100D92F5B /* AppDelegate.swift */; };
 		975DC4481E550B8100D92F5B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975DC4471E550B8100D92F5B /* ViewController.swift */; };
 		975DC44B1E550B8100D92F5B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 975DC4491E550B8100D92F5B /* Main.storyboard */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01BDB1711E875F5500446DB5 /* CurrentWeather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentWeather.swift; sourceTree = "<group>"; };
+		01BDB1731E87604A00446DB5 /* Icon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
 		975DC4421E550B8100D92F5B /* Stormy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stormy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		975DC4451E550B8100D92F5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		975DC4471E550B8100D92F5B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -38,6 +42,8 @@
 		01BDB16C1E875CA700446DB5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				01BDB1711E875F5500446DB5 /* CurrentWeather.swift */,
+				01BDB1731E87604A00446DB5 /* Icon.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -179,6 +185,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				975DC4481E550B8100D92F5B /* ViewController.swift in Sources */,
+				01BDB1721E875F5500446DB5 /* CurrentWeather.swift in Sources */,
+				01BDB1741E87604A00446DB5 /* Icon.swift in Sources */,
 				975DC4461E550B8100D92F5B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
